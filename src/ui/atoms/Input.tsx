@@ -21,12 +21,23 @@ export const Input = ({
   ...inputProps
 }: Props) => {
   const inputId = useId();
+  const helperTextId = useId();
 
   return (
     <FormControl error={error} disabled={disabled}>
       {label && <InputLabel htmlFor={inputId}>{label}</InputLabel>}
-      <InputBase id={inputId} {...inputProps} />
-      <InputHelperText>{error ? errorText : helperText}</InputHelperText>
+      <InputBase
+        slotProps={{
+          input: {
+            id: inputId,
+          },
+        }}
+        aria-describedby={helperTextId}
+        {...inputProps}
+      />
+      <InputHelperText id={helperTextId}>
+        {error ? errorText : helperText}
+      </InputHelperText>
     </FormControl>
   );
 };

@@ -7,12 +7,12 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
-import { Providers } from "./providers";
+import { Providers, queryClient } from "./providers";
 import App from "./App.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <Providers>
+    <Providers queryClient={queryClient}>
       <CssBaseline />
       <App />
     </Providers>

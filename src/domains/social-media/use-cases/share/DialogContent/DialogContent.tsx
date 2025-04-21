@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import InfoOutlineIcon from "@mui/icons-material/InfoOutline";
 import { z } from "zod";
-import { useState } from "react";
+import { useId, useState } from "react";
 
 import {
   SocialMediaProfile as SocialMediaProfileType,
@@ -66,6 +66,8 @@ export const DialogContent = ({
   onCancel,
   onSubmit,
 }: Props) => {
+  const shareToProfilesTitleId = useId();
+
   const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState<FormData>({
     preset: null,
@@ -99,8 +101,12 @@ export const DialogContent = ({
             direction={{ xs: "column-reverse", sm: "row" }}
           >
             <Grid size={1}>
-              <Stack spacing={3}>
-                <Typography variant="h6" color="text.secondary">
+              <Stack spacing={3} aria-labelledby={shareToProfilesTitleId}>
+                <Typography
+                  variant="h6"
+                  color="text.secondary"
+                  id={shareToProfilesTitleId}
+                >
                   Share to Profiles
                 </Typography>
                 {!!validationErrors?.profilesToPlatformSelectionMap && (
@@ -279,8 +285,11 @@ const InputLabelWithHelp = ({
   Hence, empty state placeholder with navigation to profile linking page (not implemented)
 */
 const NoProfilesPlaceholder = () => {
+  const titleId = useId();
+
   return (
     <Stack
+      aria-labelledby={titleId}
       sx={(theme) => ({
         border: `1px solid ${theme.palette.secondary.main}`,
         borderRadius: 2,
@@ -288,7 +297,7 @@ const NoProfilesPlaceholder = () => {
       })}
       spacing={2}
     >
-      <Typography variant="h6">
+      <Typography id={titleId} variant="h6">
         No social profiles linked yet. Add at least one to continue
       </Typography>
       <Button variant="contained">Link profile</Button>

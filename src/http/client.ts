@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 
-const API_BASE_URL = "https://media.scoreplay.io";
+export const API_BASE_URL = "https://media.scoreplay.io";
 
 const httpClient = axios.create({
   baseURL: API_BASE_URL,

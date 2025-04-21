@@ -4,6 +4,7 @@ import {
   SocialPlatform,
 } from "~/domains/social-media/types";
 import { PlatformSwitch } from "./PlatformSwitch";
+import { useId } from "react";
 
 type Props = {
   profile: SocialMediaProfileType;
@@ -19,8 +20,11 @@ export const SocialMediaProfile = ({
   selectedPlatforms,
   onPlatformChange,
 }: Props) => {
+  const titleId = useId();
+
   return (
     <Stack
+      aria-labelledby={titleId}
       gap={2}
       sx={(theme) => ({
         border: `1px solid ${theme.palette.secondary.main}`,
@@ -29,6 +33,7 @@ export const SocialMediaProfile = ({
       })}
     >
       <Typography
+        id={titleId}
         variant="h6"
         fontWeight="fontWeightBold"
         color="primary.light"

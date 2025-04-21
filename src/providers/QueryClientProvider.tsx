@@ -4,14 +4,18 @@ import {
 } from "@tanstack/react-query";
 
 type Props = {
+  queryClient: QueryClient;
   children: React.ReactNode;
 };
 
-const queryClient = new QueryClient();
+export const queryClient = new QueryClient();
 
-export const QueryClientProvider = ({ children }: Props) => {
+export const QueryClientProvider = ({
+  queryClient: queryClientProp,
+  children,
+}: Props) => {
   return (
-    <TanstackQueryClientProvider client={queryClient}>
+    <TanstackQueryClientProvider client={queryClientProp}>
       {children}
     </TanstackQueryClientProvider>
   );

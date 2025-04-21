@@ -42,18 +42,22 @@ export const Select = <T,>({
 }: Props<T>) => {
   const inputId = useId();
   const labelId = useId();
+  const helperTextId = useId();
 
   return (
     <FormControl error={error} disabled={disabled}>
-      {label && <InputLabel htmlFor={inputId}>{label}</InputLabel>}
+      {label && <InputLabel id={labelId}>{label}</InputLabel>}
       <MuiSelect
         {...selectProps}
         IconComponent={StyledIcon}
         id={inputId}
         labelId={labelId}
+        aria-describedby={helperTextId}
         input={<StyledInputBase />}
       />
-      <InputHelperText>{error ? errorText : helperText}</InputHelperText>
+      <InputHelperText id={helperTextId}>
+        {error ? errorText : helperText}
+      </InputHelperText>
     </FormControl>
   );
 };

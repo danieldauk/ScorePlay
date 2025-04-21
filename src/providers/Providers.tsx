@@ -1,14 +1,19 @@
+import { QueryClient } from "@tanstack/react-query";
+
 import { MuiThemeProvider } from "./MuiThemeProvider";
 import { QueryClientProvider } from "./QueryClientProvider";
 
 type Props = {
+  queryClient: QueryClient;
   children: React.ReactNode;
 };
 
-export const Providers = ({ children }: Props) => {
+export const Providers = ({ queryClient, children }: Props) => {
   return (
     <MuiThemeProvider>
-      <QueryClientProvider>{children}</QueryClientProvider>
+      <QueryClientProvider queryClient={queryClient}>
+        {children}
+      </QueryClientProvider>
     </MuiThemeProvider>
   );
 };
