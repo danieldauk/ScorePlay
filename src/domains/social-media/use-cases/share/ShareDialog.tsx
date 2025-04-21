@@ -17,7 +17,7 @@ export const ShareDialog = ({ onClose }: Props) => {
       maxWidth="md"
       slotProps={{
         paper: {
-          sx: { borderRadius: 3 },
+          sx: { borderRadius: 3, boxShadow: 'none' },
         },
         backdrop: {
           sx: (theme) => ({
