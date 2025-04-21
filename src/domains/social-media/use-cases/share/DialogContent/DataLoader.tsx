@@ -1,6 +1,8 @@
 import { useSocialMediaProfilesQuery } from "~/domains/social-media/api/queries/use-social-media-profiles";
 import { notReachable } from "~/utils/not-reachable";
 import { DataSubmitter } from "./DataSubmitter";
+import { ErrorDialogContent } from "./ErrorDialogContent";
+import { LoadingDialogContent } from "./LoadingDialogContent";
 
 type Props = {
   onShared: () => void;
@@ -12,11 +14,14 @@ export const DataLoader = ({ onShared, onCancel }: Props) => {
 
   switch (socialMediaProfilesQuery.status) {
     case "error":
-      // TODO:
-      return null;
+      return (
+        <ErrorDialogContent
+          onCancel={onCancel}
+          onRetry={() => socialMediaProfilesQuery.refetch()}
+        />
+      );
     case "pending":
-      // TODO:
-      return null;
+      return <LoadingDialogContent />;
     case "success":
       return (
         <DataSubmitter

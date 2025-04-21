@@ -7,7 +7,6 @@ type Props = {
   onClose: () => void;
 };
 
-// TODO: implement
 export const ShareDialog = ({ onClose }: Props) => {
   return (
     <Dialog
@@ -17,7 +16,7 @@ export const ShareDialog = ({ onClose }: Props) => {
       maxWidth="md"
       slotProps={{
         paper: {
-          sx: { borderRadius: 3, boxShadow: 'none' },
+          sx: { borderRadius: 3, boxShadow: "none" },
         },
         backdrop: {
           sx: (theme) => ({
@@ -31,6 +30,7 @@ export const ShareDialog = ({ onClose }: Props) => {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
+          mb: 2.5,
         }}
       >
         <span>Share to Social Media</span>
