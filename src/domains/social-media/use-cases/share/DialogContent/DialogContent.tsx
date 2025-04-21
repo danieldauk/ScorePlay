@@ -152,7 +152,7 @@ export const DialogContent = ({
                     />
                   ))
                 ) : (
-                  <Typography>You dont have any profiles</Typography>
+                  <NoProfilesPlaceholder />
                 )}
               </Stack>
             </Grid>
@@ -270,6 +270,28 @@ const InputLabelWithHelp = ({
           })}
         />
       </Tooltip>
+    </Stack>
+  );
+};
+
+/* 
+  Ideally, we want to make it easier for user to link social profile. 
+  Hence, empty state placeholder with navigation to profile linking page (not implemented)
+*/
+const NoProfilesPlaceholder = () => {
+  return (
+    <Stack
+      sx={(theme) => ({
+        border: `1px solid ${theme.palette.secondary.main}`,
+        borderRadius: 2,
+        p: 3,
+      })}
+      spacing={2}
+    >
+      <Typography variant="h6">
+        No social profiles linked yet. Add at least one to continue
+      </Typography>
+      <Button variant="contained">Link profile</Button>
     </Stack>
   );
 };
