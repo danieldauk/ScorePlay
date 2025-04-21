@@ -66,7 +66,6 @@ type ValidationErrors = {
 
 const FORM_ID = "social-share-form-id";
 
-// TODO: implement
 export const DialogContent = ({
   socialMediaProfiles,
   onCancel,
@@ -275,7 +274,9 @@ const InputLabelWithHelp = ({
   );
 };
 
-// TODO: either leave explanatory comment or update according to email asnwer
+/* 
+  Not sure what preset means in this form, so treating this field as a dummy select.
+*/
 const PRESETS = ["preset1", "preset2", "preset3"];
 
 const MIN_TITLE_LENGTH = 1;
