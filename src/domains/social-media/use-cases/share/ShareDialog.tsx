@@ -30,7 +30,7 @@ export const ShareDialog = ({ onClose }: Props) => {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          mb: 2.5,
+          mb: 3,
         }}
       >
         <span>Share to Social Media</span>
