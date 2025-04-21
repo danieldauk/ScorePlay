@@ -1,4 +1,4 @@
-import { Dialog, DialogTitle, IconButton } from "@mui/material";
+import { Dialog, DialogTitle, IconButton, alpha } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
 import { DialogContent } from "./DialogContent";
@@ -10,20 +10,35 @@ type Props = {
 // TODO: implement
 export const ShareDialog = ({ onClose }: Props) => {
   return (
-    <Dialog open onClose={onClose}>
-      <DialogTitle>Share to Social Media</DialogTitle>
-      <IconButton
-        aria-label="close"
-        onClick={onClose}
-        sx={(theme) => ({
-          position: "absolute",
-          right: 8,
-          top: 8,
-          color: theme.palette.grey[500],
-        })}
+    <Dialog
+      open
+      onClose={onClose}
+      fullWidth
+      maxWidth="md"
+      slotProps={{
+        paper: {
+          sx: { borderRadius: 3 },
+        },
+        backdrop: {
+          sx: (theme) => ({
+            backgroundColor: alpha(theme.palette.primary.main, 0.5),
+          }),
+        },
+      }}
+    >
+      <DialogTitle
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
       >
-        <CloseIcon />
-      </IconButton>
+        <span>Share to Social Media</span>
+        <IconButton aria-label="close" onClick={onClose} size="small">
+          <CloseIcon fontSize="small" />
+        </IconButton>
+      </DialogTitle>
+
       <DialogContent onShared={onClose} onCancel={onClose} />
     </Dialog>
   );

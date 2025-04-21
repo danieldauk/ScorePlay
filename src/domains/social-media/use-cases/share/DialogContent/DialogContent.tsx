@@ -1,17 +1,15 @@
 import {
   DialogContent as MuiDialogContent,
   DialogActions,
-  Button,
   Grid,
-  Box,
   Typography,
   Stack,
-  TextField,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
+  Alert,
+  Box,
+  Tooltip,
 } from "@mui/material";
+import InfoOutlineIcon from "@mui/icons-material/InfoOutline";
+import { z } from "zod";
 
 import {
   SocialMediaProfile as SocialMediaProfileType,
@@ -21,7 +19,10 @@ import {
 import { NonEmptyArray } from "~/utils/non-empty-array";
 import { SocialMediaProfile } from "./SocialMediaProfile";
 import { useState } from "react";
-import { z } from "zod";
+
+import { Input } from "~/ui/atoms/Input";
+import { Select } from "~/ui/atoms/Select";
+import { Button } from "~/ui/atoms/Button";
 
 type Props = {
   socialMediaProfiles: SocialMediaProfileType[];
@@ -63,6 +64,8 @@ type ValidationErrors = {
   profilesToPlatformSelectionMap?: string;
 };
 
+const FORM_ID = "social-share-form-id";
+
 // TODO: implement
 export const DialogContent = ({
   socialMediaProfiles,
@@ -80,133 +83,195 @@ export const DialogContent = ({
   const validationErrors = getValidationErrors({ submitted, formData });
 
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        setSubmitted(true);
-
-        const result = validationSchema.safeParse(formData);
-
-        if (result.success) {
-          onSubmit(result.data);
-        }
-      }}
-    >
+    <>
       <MuiDialogContent>
-        <Grid container spacing={4}>
-          <Box>
-            <Typography variant="h6">Share to profiles</Typography>
-            {socialMediaProfiles.length ? (
-              socialMediaProfiles.map((profile) => (
-                <SocialMediaProfile
-                  key={profile.id}
-                  profile={profile}
-                  selectedPlatforms={
-                    formData.profilesToPlatformSelectionMap.get(profile.id) ||
-                    []
-                  }
-                  onPlatformChange={({ platform, shouldShare }) => {
-                    setFormData((prevFormData) => {
-                      const newMap = new Map(
-                        prevFormData.profilesToPlatformSelectionMap,
-                      );
-                      let updatedProfilePlatforms = [
-                        ...(newMap.get(profile.id) || []),
-                      ];
+        <form
+          id={FORM_ID}
+          onSubmit={(e) => {
+            e.preventDefault();
+            setSubmitted(true);
 
-                      if (shouldShare) {
-                        updatedProfilePlatforms.push(platform);
-                      } else {
-                        updatedProfilePlatforms =
-                          updatedProfilePlatforms.filter(
-                            (selectedPlatform) => selectedPlatform !== platform,
-                          );
+            const result = validationSchema.safeParse(formData);
+
+            if (result.success) {
+              onSubmit(result.data);
+            }
+          }}
+        >
+          <Grid container spacing={5} columns={2}>
+            <Grid size="grow">
+              <Stack spacing={3}>
+                <Typography variant="h6" color="text.secondary">
+                  Share to Profiles
+                </Typography>
+                {!!validationErrors?.profilesToPlatformSelectionMap && (
+                  <Alert severity="error">
+                    {validationErrors?.profilesToPlatformSelectionMap}
+                  </Alert>
+                )}
+                {socialMediaProfiles.length ? (
+                  socialMediaProfiles.map((profile) => (
+                    <SocialMediaProfile
+                      key={profile.id}
+                      profile={profile}
+                      selectedPlatforms={
+                        formData.profilesToPlatformSelectionMap.get(
+                          profile.id,
+                        ) || []
                       }
+                      onPlatformChange={({ platform, shouldShare }) => {
+                        setFormData((prevFormData) => {
+                          const newMap = new Map(
+                            prevFormData.profilesToPlatformSelectionMap,
+                          );
+                          let updatedProfilePlatforms = [
+                            ...(newMap.get(profile.id) || []),
+                          ];
 
-                      newMap.set(profile.id, updatedProfilePlatforms);
+                          if (shouldShare) {
+                            updatedProfilePlatforms.push(platform);
+                          } else {
+                            updatedProfilePlatforms =
+                              updatedProfilePlatforms.filter(
+                                (selectedPlatform) =>
+                                  selectedPlatform !== platform,
+                              );
+                          }
 
-                      return {
-                        ...prevFormData,
-                        profilesToPlatformSelectionMap: newMap,
-                      };
-                    });
-                  }}
-                />
-              ))
-            ) : (
-              <Typography>You dont have any profiles</Typography>
-            )}
-          </Box>
-          <Stack>
-            <Stack>
-              <Typography variant="h6">Branding Presets</Typography>
-              <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">
-                  Select Branding Preset
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  label="Preset"
-                  value={formData.preset}
-                  error={!!validationErrors?.preset}
-                  onChange={(e) =>
-                    setFormData((prevFormData) => ({
-                      ...prevFormData,
-                      preset: e.target.value,
-                    }))
-                  }
-                >
-                  {PRESETS.map((preset) => (
-                    <MenuItem key={preset} value={preset}>
-                      {preset}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Stack>
-            <Stack>
-              <Typography variant="h6">Post details</Typography>
-              <Stack>
-                <TextField
-                  error={!!validationErrors?.title}
-                  label="Post title"
-                  value={formData.title}
-                  onChange={(e) =>
-                    setFormData((prevFormData) => ({
-                      ...prevFormData,
-                      title: e.target.value,
-                    }))
-                  }
-                />
-                <Box>
-                  <TextField
-                    error={!!validationErrors?.description}
-                    label="Description/Caption"
-                    multiline
-                    value={formData.description}
+                          if (updatedProfilePlatforms.length) {
+                            newMap.set(profile.id, updatedProfilePlatforms);
+                          } else {
+                            newMap.delete(profile.id);
+                          }
+
+                          return {
+                            ...prevFormData,
+                            profilesToPlatformSelectionMap: newMap,
+                          };
+                        });
+                      }}
+                    />
+                  ))
+                ) : (
+                  <Typography>You dont have any profiles</Typography>
+                )}
+              </Stack>
+            </Grid>
+            <Grid size="grow">
+              <Stack spacing={3}>
+                <Stack spacing={1}>
+                  <Typography variant="h6" color="text.secondary">
+                    Branding Presets
+                  </Typography>
+                  <Select
+                    label="Select Branding Preset"
+                    value={formData.preset || ""}
+                    error={!!validationErrors?.preset}
+                    errorText={validationErrors?.preset}
                     onChange={(e) =>
                       setFormData((prevFormData) => ({
                         ...prevFormData,
-                        description: e.target.value,
+                        preset: e.target.value,
                       }))
                     }
-                  />
-                  {/* TODO: */}
-                  <Typography>Character count</Typography>
-                </Box>
+                  >
+                    {PRESETS.map((preset) => (
+                      <Select.MenuItem key={preset} value={preset}>
+                        {preset}
+                      </Select.MenuItem>
+                    ))}
+                  </Select>
+                </Stack>
+                <Stack spacing={1}>
+                  <Typography variant="h6" color="text.secondary">
+                    Post details
+                  </Typography>
+                  <Stack spacing={3}>
+                    <Input
+                      label={
+                        <InputLabelWithHelp label="Post title" help="Help" />
+                      }
+                      error={!!validationErrors?.title}
+                      errorText={validationErrors?.title}
+                      value={formData.title || ""}
+                      onChange={(e) =>
+                        setFormData((prevFormData) => ({
+                          ...prevFormData,
+                          title: e.target.value,
+                        }))
+                      }
+                    />
+
+                    <Input
+                      error={!!validationErrors?.description}
+                      errorText={validationErrors?.description}
+                      label={
+                        <InputLabelWithHelp
+                          label="Description/Caption"
+                          help="Help"
+                        />
+                      }
+                      multiline
+                      minRows={3}
+                      value={formData.description || ""}
+                      onChange={(e) =>
+                        setFormData((prevFormData) => ({
+                          ...prevFormData,
+                          description: e.target.value,
+                        }))
+                      }
+                      helperText={`Character count ${
+                        formData.description?.length || 0
+                      }/${MAX_DESCRIPTION_LENGTH}`}
+                    />
+                  </Stack>
+                </Stack>
               </Stack>
-            </Stack>
-          </Stack>
-        </Grid>
+            </Grid>
+          </Grid>
+        </form>
       </MuiDialogContent>
-      <DialogActions>
+
+      <DialogActions
+        sx={(theme) => ({
+          padding: theme.spacing(3),
+        })}
+      >
         <Button onClick={onCancel}>Cancel</Button>
-        <Button type="submit" disabled={!!validationErrors}>
+        <Button
+          form={FORM_ID}
+          variant="contained"
+          type="submit"
+          disabled={!!validationErrors}
+        >
           Share to socials
         </Button>
       </DialogActions>
-    </form>
+    </>
+  );
+};
+
+const InputLabelWithHelp = ({
+  label,
+  help,
+}: {
+  label: string;
+  help: string;
+}) => {
+  return (
+    <Stack direction="row" alignItems="center" spacing={0.5}>
+      <Box>{label}</Box>
+      <Tooltip
+        placement="top"
+        title={<Typography variant="body1">{help}</Typography>}
+      >
+        <InfoOutlineIcon
+          sx={(theme) => ({
+            fontSize: theme.typography.body1,
+          })}
+        />
+      </Tooltip>
+    </Stack>
   );
 };
 

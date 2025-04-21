@@ -1,13 +1,9 @@
-import {
-  Box,
-  FormControlLabel,
-  Stack,
-  Switch,
-  Typography,
-} from "@mui/material";
+import { alpha, Box, FormControlLabel, Stack, Typography } from "@mui/material";
 
 import { SocialPlatform } from "~/domains/social-media/types";
-import { SocialPlatformIcon } from "./SocialPlatformIcon";
+import { Switch } from "~/ui/atoms/Switch";
+import { getPlatformName } from "~/domains/social-media/helpers/getPlatformName";
+import { SocialPlatformIcon } from "~/domains/social-media/components/SocialPlatformIcon";
 
 type Props = {
   platform: SocialPlatform;
@@ -17,34 +13,34 @@ type Props = {
 
 export const PlatformSwitch = ({ platform, checked, onChange }: Props) => {
   return (
-    <FormControlLabel
-      value={platform}
-      checked={checked}
-      onChange={onChange}
-      control={<Switch color="primary" />}
-      label={
-        <Stack direction="row">
-          <SocialPlatformIcon platform={platform} />
-          <Box>
-            <Typography>{getPlatformName(platform)}</Typography>
-          </Box>
-        </Stack>
-      }
-      labelPlacement="start"
-    />
+    <Box
+      sx={(theme) => ({
+        backgroundColor: alpha(theme.palette.secondary.main, 0.4),
+        p: 1,
+      })}
+    >
+      <FormControlLabel
+        sx={{
+          m: 0,
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+        value={platform}
+        checked={checked}
+        onChange={onChange}
+        control={<Switch />}
+        label={
+          <Stack direction="row" spacing={2}>
+            <SocialPlatformIcon platform={platform} />
+            <Box>
+              <Typography fontWeight="fontWeightBold" color="primary.light">
+                {getPlatformName(platform)}
+              </Typography>
+            </Box>
+          </Stack>
+        }
+        labelPlacement="start"
+      />
+    </Box>
   );
-};
-
-// TODO: move to reusable domain helpers
-const getPlatformName = (platform: SocialPlatform): string => {
-  switch (platform) {
-    case "instagram":
-      return "Instagram";
-    case "twitter":
-      return "Twitter";
-    case "youtube":
-      return "YouTube";
-    default:
-      return platform;
-  }
 };

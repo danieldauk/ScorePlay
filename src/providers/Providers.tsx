@@ -1,3 +1,4 @@
+import { MuiThemeProvider } from "./MuiThemeProvider";
 import { QueryClientProvider } from "./QueryClientProvider";
 
 type Props = {
@@ -5,5 +6,9 @@ type Props = {
 };
 
 export const Providers = ({ children }: Props) => {
-  return <QueryClientProvider>{children}</QueryClientProvider>;
+  return (
+    <MuiThemeProvider>
+      <QueryClientProvider>{children}</QueryClientProvider>
+    </MuiThemeProvider>
+  );
 };
