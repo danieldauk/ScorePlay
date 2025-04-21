@@ -289,6 +289,7 @@ const validationSchema = z
       .string({
         message: "Required field",
       })
+      .trim()
       .min(MIN_TITLE_LENGTH, {
         message: `Title should be at least ${MIN_TITLE_LENGTH} character(s)`,
       }),
@@ -300,6 +301,7 @@ const validationSchema = z
       .string({
         message: "Required field",
       })
+      .trim()
       .min(MIN_DESCRIPTION_LENGTH, {
         message: `Description should be at least ${MIN_DESCRIPTION_LENGTH} character(s)`,
       })
