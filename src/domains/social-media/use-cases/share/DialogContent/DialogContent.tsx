@@ -97,8 +97,13 @@ export const DialogContent = ({
             }
           }}
         >
-          <Grid container spacing={5} columns={2}>
-            <Grid size="grow">
+          <Grid
+            container
+            spacing={5}
+            columns={{ xs: 1, sm: 2 }}
+            direction={{ xs: "column-reverse", sm: "row" }}
+          >
+            <Grid size={1}>
               <Stack spacing={3}>
                 <Typography variant="h6" color="text.secondary">
                   Share to Profiles
@@ -156,7 +161,7 @@ export const DialogContent = ({
                 )}
               </Stack>
             </Grid>
-            <Grid size="grow">
+            <Grid size={1}>
               <Stack spacing={3}>
                 <Stack spacing={1}>
                   <Typography variant="h6" color="text.secondary">
