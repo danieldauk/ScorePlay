@@ -12,14 +12,10 @@ import { InputLabel } from "./InputLabel";
 import { InputHelperText } from "./InputHelperText";
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  "& :focus": {
-    borderRadius: theme.shape.borderRadius * 2,
-  },
   "& [aria-expanded=true]": {
     outlineWidth: "1px",
     outlineStyle: "solid",
     outlineColor: theme.palette.primary.main,
-    borderRadius: theme.shape.borderRadius * 2,
   },
 }));
 

@@ -19,6 +19,7 @@ export const InputBase = styled(MuiInputBase)(({ theme }) => ({
     padding: theme.spacing(1),
     "&:focus": {
       outline: `1px solid ${theme.palette.primary.main}`,
+      borderRadius: theme.shape.borderRadius * 2,
     },
     "&[aria-invalid=true]": {
       borderColor: theme.palette.error.main,
