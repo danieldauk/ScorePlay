@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import InfoOutlineIcon from "@mui/icons-material/InfoOutline";
 import { z } from "zod";
+import { useState } from "react";
 
 import {
   SocialMediaProfile as SocialMediaProfileType,
@@ -18,7 +19,6 @@ import {
 
 import { NonEmptyArray } from "~/utils/non-empty-array";
 import { SocialMediaProfile } from "./SocialMediaProfile";
-import { useState } from "react";
 
 import { Input } from "~/ui/atoms/Input";
 import { Select } from "~/ui/atoms/Select";
@@ -29,11 +29,6 @@ type Props = {
   onSubmit: (data: ValidatedFormData) => void;
   onCancel: () => void;
 };
-
-/* 
-  I would typically define this type at the API method level for better context. 
-  Since I'm not implementing the API method here, I've placed it in this file instead.
-*/
 
 type ProfileShareSelection = {
   id: SocialMediaProfileType["id"];
@@ -216,7 +211,7 @@ export const DialogContent = ({
                         />
                       }
                       multiline
-                      minRows={3}
+                      minRows={5}
                       value={formData.description || ""}
                       onChange={(e) =>
                         setFormData((prevFormData) => ({
