@@ -6,9 +6,10 @@ function App() {
   return (
     <>
       <button onClick={() => setShareDialogOpen(true)}>Open dialog</button>
-      {isShareDialogOpen && (
-        <ShareDialog onClose={() => setShareDialogOpen(false)} />
-      )}
+      <ShareDialog
+        open={isShareDialogOpen}
+        onClose={() => setShareDialogOpen(false)}
+      />
     </>
   );
 }

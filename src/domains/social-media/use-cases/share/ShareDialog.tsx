@@ -4,13 +4,14 @@ import CloseIcon from "@mui/icons-material/Close";
 import { DialogContent } from "./DialogContent";
 
 type Props = {
+  open: boolean;
   onClose: () => void;
 };
 
-export const ShareDialog = ({ onClose }: Props) => {
+export const ShareDialog = ({ open, onClose }: Props) => {
   return (
     <Dialog
-      open
+      open={open}
       onClose={onClose}
       fullWidth
       maxWidth="md"
