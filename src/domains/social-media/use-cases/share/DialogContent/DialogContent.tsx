@@ -387,7 +387,7 @@ const getValidationErrors = ({
     preset: fieldErrors.preset?.[0],
     profilesToPlatformSelectionMap: fieldErrors
       .profilesToPlatformSelectionMap?.[0]
-      ? "At least one platform should be selected"
+      ? "Please select at least one social platform for at least one profile"
       : undefined,
   };
 };
