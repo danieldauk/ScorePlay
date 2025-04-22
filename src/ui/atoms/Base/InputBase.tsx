@@ -1,9 +1,9 @@
 import {
   InputBase as MuiInputBase,
+  inputBaseClasses,
   InputBaseProps as MuiInputBaseProps,
   lighten,
-  styled,
-} from "@mui/material";
+  styled} from "@mui/material";
 
 export type InputBaseProps = MuiInputBaseProps;
 
@@ -11,7 +11,7 @@ export const InputBase = styled(MuiInputBase)(({ theme }) => ({
   "label + &": {
     marginTop: theme.spacing(0.5),
   },
-  "& .MuiInputBase-input": {
+  [`& .${inputBaseClasses.input}`]: {
     borderRadius: theme.shape.borderRadius * 2,
     position: "relative",
     backgroundColor: lighten(theme.palette.secondary.main, 0.7),
