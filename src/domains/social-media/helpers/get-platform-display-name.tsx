@@ -1,6 +1,6 @@
 import { SocialPlatform } from "~/domains/social-media/types";
 
-export const getPlatformName = (platform: SocialPlatform): string => {
+export const getPlatformDisplayName = (platform: SocialPlatform): string => {
   switch (platform) {
     case "instagram":
       return "Instagram";
