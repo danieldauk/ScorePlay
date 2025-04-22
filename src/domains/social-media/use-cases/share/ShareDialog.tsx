@@ -26,12 +26,14 @@ export const ShareDialog = ({ onClose }: Props) => {
       }}
     >
       <DialogTitle
-        sx={{
+        sx={(theme) => ({
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
+          fontWeight: theme.typography.fontWeightBold,
+          backgroundColor: theme.palette.secondary.main,
           mb: 3,
-        }}
+        })}
       >
         <span>Share to Social Media</span>
         <IconButton aria-label="close" onClick={onClose} size="small">

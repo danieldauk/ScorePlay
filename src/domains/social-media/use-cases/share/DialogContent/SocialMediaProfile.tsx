@@ -1,4 +1,4 @@
-import { Stack, Typography } from "@mui/material";
+import { lighten, Stack, Typography } from "@mui/material";
 import {
   SocialMediaProfile as SocialMediaProfileType,
   SocialPlatform,
@@ -27,7 +27,7 @@ export const SocialMediaProfile = ({
       aria-labelledby={titleId}
       gap={2}
       sx={(theme) => ({
-        border: `1px solid ${theme.palette.secondary.main}`,
+        border: `1px solid ${lighten(theme.palette.primary.main, 0.8)}`,
         borderRadius: 2,
         p: 1,
       })}

@@ -17,14 +17,4 @@ export const theme = createTheme({
   typography: {
     fontSize: 12,
   },
-  components: {
-    MuiDialogTitle: {
-      styleOverrides: {
-        root: {
-          background: "#EDF2FF",
-          fontWeight: 700,
-        },
-      },
-    },
-  },
 });
