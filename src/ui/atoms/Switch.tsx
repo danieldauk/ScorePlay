@@ -35,6 +35,9 @@ export const Switch = ({ ...props }: Props) => {
         [`& .${switchClasses.track}`]: {
           backgroundColor: theme.palette.primary.main,
         },
+        ["& .Mui-focusVisible .MuiTouchRipple-root"]: {
+          color: theme.palette.primary.light,
+        },
       })}
     />
   );
