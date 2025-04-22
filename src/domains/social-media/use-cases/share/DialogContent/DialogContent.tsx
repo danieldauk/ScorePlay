@@ -45,7 +45,7 @@ type FormData = {
   preset: string | null;
   title: string | null;
   description: string | null;
-  profilesToPlatformSelectionMap: Map<
+  profileIdToPlatformSelectionMap: Map<
     SocialMediaProfileType["id"],
     Array<SocialPlatform>
   >;
@@ -65,7 +65,7 @@ export const DialogContent = ({
     preset: null,
     title: null,
     description: null,
-    profilesToPlatformSelectionMap: new Map(),
+    profileIdToPlatformSelectionMap: new Map(),
   });
 
   const validationErrors = getValidationErrors({ submitted, formData });
@@ -101,9 +101,9 @@ export const DialogContent = ({
                 >
                   Share to Profiles
                 </Typography>
-                {!!validationErrors?.profilesToPlatformSelectionMap && (
+                {!!validationErrors?.profileIdToPlatformSelectionMap && (
                   <Alert severity="error">
-                    {validationErrors?.profilesToPlatformSelectionMap}
+                    {validationErrors?.profileIdToPlatformSelectionMap}
                   </Alert>
                 )}
                 {socialMediaProfiles.length ? (
@@ -112,14 +112,14 @@ export const DialogContent = ({
                       key={profile.id}
                       profile={profile}
                       selectedPlatforms={
-                        formData.profilesToPlatformSelectionMap.get(
+                        formData.profileIdToPlatformSelectionMap.get(
                           profile.id,
                         ) || []
                       }
                       onPlatformChange={({ platform, shouldShare }) => {
                         setFormData((prevFormData) => {
                           const newMap = new Map(
-                            prevFormData.profilesToPlatformSelectionMap,
+                            prevFormData.profileIdToPlatformSelectionMap,
                           );
                           let updatedProfilePlatforms = [
                             ...(newMap.get(profile.id) || []),
@@ -143,7 +143,7 @@ export const DialogContent = ({
 
                           return {
                             ...prevFormData,
-                            profilesToPlatformSelectionMap: newMap,
+                            profileIdToPlatformSelectionMap: newMap,
                           };
                         });
                       }}
@@ -332,7 +332,7 @@ const validationSchema = z
       .max(MAX_DESCRIPTION_LENGTH, {
         message: `Description should at most ${MAX_DESCRIPTION_LENGTH} character(s)`,
       }),
-    profilesToPlatformSelectionMap: z
+    profileIdToPlatformSelectionMap: z
       .map(
         z.number(),
         z
@@ -343,12 +343,12 @@ const validationSchema = z
       .refine((map) => map.size >= 1),
   })
   .transform<ValidatedFormData>(
-    ({ title, description, preset, profilesToPlatformSelectionMap }) => {
+    ({ title, description, preset, profileIdToPlatformSelectionMap }) => {
       return {
         title,
         description,
         preset,
-        profiles: Array.from(profilesToPlatformSelectionMap.entries()).map(
+        profiles: Array.from(profileIdToPlatformSelectionMap.entries()).map(
           ([profileId, platforms]) => ({ id: profileId, platforms }),
         ) as NonEmptyArray<ProfileShareSelection>,
       };
@@ -359,7 +359,7 @@ type ValidationErrors = {
   preset?: string;
   title?: string;
   description?: string;
-  profilesToPlatformSelectionMap?: string;
+  profileIdToPlatformSelectionMap?: string;
 };
 
 const getValidationErrors = ({
@@ -385,8 +385,8 @@ const getValidationErrors = ({
     title: fieldErrors.title?.[0],
     description: fieldErrors.description?.[0],
     preset: fieldErrors.preset?.[0],
-    profilesToPlatformSelectionMap: fieldErrors
-      .profilesToPlatformSelectionMap?.[0]
+    profileIdToPlatformSelectionMap: fieldErrors
+      .profileIdToPlatformSelectionMap?.[0]
       ? "Please select at least one social platform for at least one profile"
       : undefined,
   };
