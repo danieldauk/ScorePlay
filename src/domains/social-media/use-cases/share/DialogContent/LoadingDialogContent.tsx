@@ -1,11 +1,11 @@
-import { CircularProgress, DialogContent, Stack } from "@mui/material";
+import { Box, CircularProgress, DialogContent } from "@mui/material";
 
 export const LoadingDialogContent = () => {
   return (
     <DialogContent>
-      <Stack spacing={2} alignItems="center" py={5}>
+      <Box display="flex" justifyContent="center" py={5}>
         <CircularProgress size={40} />
-      </Stack>
+      </Box>
     </DialogContent>
   );
 };
