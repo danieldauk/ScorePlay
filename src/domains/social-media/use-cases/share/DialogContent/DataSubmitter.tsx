@@ -7,6 +7,9 @@ type Props = {
   onCancel: () => void;
 };
 
+/* 
+  I would send a request to the server here while managing the loading and error states
+*/
 export const DataSubmitter = ({
   socialMediaProfiles,
   onShared,
