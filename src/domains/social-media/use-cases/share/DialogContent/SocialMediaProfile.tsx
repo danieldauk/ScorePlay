@@ -1,10 +1,12 @@
 import { lighten, Stack, Typography } from "@mui/material";
+import { useId } from "react";
+
 import {
   SocialMediaProfile as SocialMediaProfileType,
   SocialPlatform,
 } from "~/domains/social-media/types";
+
 import { PlatformSwitch } from "./PlatformSwitch";
-import { useId } from "react";
 
 type Props = {
   profile: SocialMediaProfileType;

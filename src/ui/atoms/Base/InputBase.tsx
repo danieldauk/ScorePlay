@@ -1,8 +1,8 @@
 import {
-  styled,
   InputBase as MuiInputBase,
   InputBaseProps as MuiInputBaseProps,
   lighten,
+  styled,
 } from "@mui/material";
 
 export type InputBaseProps = MuiInputBaseProps;

@@ -1,5 +1,5 @@
-import { Dialog, DialogTitle, IconButton, alpha } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import { alpha,Dialog, DialogTitle, IconButton } from "@mui/material";
 
 import { DialogContent } from "./DialogContent";
 

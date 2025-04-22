@@ -2,8 +2,8 @@ import { screen, waitFor, within } from "@testing-library/react";
 import { http, HttpResponse } from "msw";
 
 import { EMPTY_SOCIAL_PROFILES_FIXTURE } from "~/domains/social-media/api/dto/fixtures";
-import { setupAppTest } from "~/tests/setup-test";
 import { ENDPOINTS, server } from "~/tests/mock-server";
+import { setupAppTest } from "~/tests/setup-test";
 
 test("As a user, I should be able to post content to social profiles", async () => {
   const { user } = setupAppTest();

@@ -1,6 +1,8 @@
-import { get } from "~/http/client";
-import { SocialMediaProfile } from "~/domains/social-media/types";
 import { useQuery } from "@tanstack/react-query";
+
+import { SocialMediaProfile } from "~/domains/social-media/types";
+import { get } from "~/http/client";
+
 import { socialMediaQueryKeys } from "./query-keys";
 
 type PaginationData = {

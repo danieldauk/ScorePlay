@@ -1,4 +1,5 @@
 import { SocialMediaProfile } from "~/domains/social-media/types";
+
 import { DialogContent } from "./DialogContent";
 
 type Props = {

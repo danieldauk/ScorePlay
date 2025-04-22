@@ -1,6 +1,6 @@
 import {
-  socialMediaHandlers,
   PROFILES_ENDPOINT,
+  socialMediaHandlers,
 } from "./social-media-handlers";
 
 export const handlers = [...socialMediaHandlers];

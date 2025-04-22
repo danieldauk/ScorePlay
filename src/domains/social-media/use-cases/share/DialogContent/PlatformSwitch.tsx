@@ -1,9 +1,9 @@
 import { alpha, Box, FormControlLabel, Stack, Typography } from "@mui/material";
 
+import { SocialPlatformIcon } from "~/domains/social-media/components/SocialPlatformIcon";
+import { getPlatformName } from "~/domains/social-media/helpers/getPlatformName";
 import { SocialPlatform } from "~/domains/social-media/types";
 import { Switch } from "~/ui/atoms/Switch";
-import { getPlatformName } from "~/domains/social-media/helpers/getPlatformName";
-import { SocialPlatformIcon } from "~/domains/social-media/components/SocialPlatformIcon";
 
 type Props = {
   platform: SocialPlatform;

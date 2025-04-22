@@ -3,7 +3,6 @@ import { FunctionComponent } from "react";
 import InstagramIcon from "~/assets/instagram-icon.svg?react";
 import TwitterIcon from "~/assets/twitter-icon.svg?react";
 import YoutubeIcon from "~/assets/youtube-icon.svg?react";
-
 import { SocialPlatform } from "~/domains/social-media/types";
 
 type Props = {

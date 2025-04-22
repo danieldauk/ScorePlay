@@ -1,11 +1,12 @@
+import { QueryClient } from "@tanstack/react-query";
+import { render, RenderOptions } from "@testing-library/react";
 import userEvent, {
   Options as UserEventSetupOptions,
 } from "@testing-library/user-event";
 import { ReactElement } from "react";
-import { render, RenderOptions } from "@testing-library/react";
-import { Providers } from "~/providers";
+
 import App from "~/App";
-import { QueryClient } from "@tanstack/react-query";
+import { Providers } from "~/providers";
 
 /**
  * A custom wrapper is need to isolate cache between tests

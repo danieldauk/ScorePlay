@@ -1,28 +1,27 @@
+import InfoOutlineIcon from "@mui/icons-material/InfoOutline";
 import {
-  DialogContent as MuiDialogContent,
-  DialogActions,
-  Grid,
-  Typography,
-  Stack,
   Alert,
   Box,
+  DialogActions,
+  DialogContent as MuiDialogContent,
+  Grid,
+  Stack,
   Tooltip,
+  Typography,
 } from "@mui/material";
-import InfoOutlineIcon from "@mui/icons-material/InfoOutline";
-import { z } from "zod";
 import { useId, useState } from "react";
+import { z } from "zod";
 
 import {
   SocialMediaProfile as SocialMediaProfileType,
   SocialPlatform,
 } from "~/domains/social-media/types";
-
-import { NonEmptyArray } from "~/utils/non-empty-array";
-import { SocialMediaProfile } from "./SocialMediaProfile";
-
+import { Button } from "~/ui/atoms/Button";
 import { Input } from "~/ui/atoms/Input";
 import { Select } from "~/ui/atoms/Select";
-import { Button } from "~/ui/atoms/Button";
+import { NonEmptyArray } from "~/utils/non-empty-array";
+
+import { SocialMediaProfile } from "./SocialMediaProfile";
 
 type Props = {
   socialMediaProfiles: SocialMediaProfileType[];

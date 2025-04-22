@@ -1,15 +1,16 @@
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import {
-  styled,
-  Select as MuiSelect,
   FormControl,
   MenuItem,
+  Select as MuiSelect,
   SelectProps,
+  styled,
 } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useId } from "react";
+
 import { InputBase } from "./Base/InputBase";
-import { InputLabel } from "./InputLabel";
 import { InputHelperText } from "./InputHelperText";
+import { InputLabel } from "./InputLabel";
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   "& [aria-expanded=true]": {
