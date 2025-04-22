@@ -29,16 +29,16 @@ type Props = {
   onCancel: () => void;
 };
 
-type ProfileShareSelection = {
-  id: SocialMediaProfileType["id"];
-  platforms: NonEmptyArray<SocialPlatform>;
-};
-
 type ValidatedFormData = {
   preset: string;
   title: string;
   description: string;
   profiles: NonEmptyArray<ProfileShareSelection>;
+};
+
+type ProfileShareSelection = {
+  id: SocialMediaProfileType["id"];
+  platforms: NonEmptyArray<SocialPlatform>;
 };
 
 type FormData = {
@@ -49,13 +49,6 @@ type FormData = {
     SocialMediaProfileType["id"],
     Array<SocialPlatform>
   >;
-};
-
-type ValidationErrors = {
-  preset?: string;
-  title?: string;
-  description?: string;
-  profilesToPlatformSelectionMap?: string;
 };
 
 const FORM_ID = "social-share-form-id";
@@ -361,6 +354,13 @@ const validationSchema = z
       };
     },
   );
+
+type ValidationErrors = {
+  preset?: string;
+  title?: string;
+  description?: string;
+  profilesToPlatformSelectionMap?: string;
+};
 
 const getValidationErrors = ({
   submitted,
