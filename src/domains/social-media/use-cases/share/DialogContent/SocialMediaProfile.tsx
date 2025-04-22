@@ -5,6 +5,7 @@ import {
   SocialMediaProfile as SocialMediaProfileType,
   SocialPlatform,
 } from "~/domains/social-media/types";
+import { Button } from "~/ui/atoms/Button";
 
 import { PlatformSwitch } from "./PlatformSwitch";
 
@@ -42,7 +43,7 @@ export const SocialMediaProfile = ({
       >
         {profile.name}
       </Typography>
-      {profile.platforms ? (
+      {profile.platforms.length ? (
         <>
           {profile.platforms.map((platform) => {
             const checked = selectedPlatforms.includes(platform);
@@ -59,9 +60,17 @@ export const SocialMediaProfile = ({
           })}
         </>
       ) : (
-        <Typography>
-          You don't have social platforms for this profile
-        </Typography>
+        /* 
+          Ideally, we want to make it easier for user to add social platform. 
+          Hence, empty state placeholder with navigation to platform addition flow (not implemented)
+        */
+        <Stack spacing={2} alignItems="center" p={2}>
+          <Typography>
+            You don't have social platforms for this profile.
+          </Typography>
+
+          <Button variant="contained">Add platform</Button>
+        </Stack>
       )}
     </Stack>
   );
