@@ -44,14 +44,10 @@ test("As a user, I should be able to post content to social profiles", async () 
   */
   expect(
     within(shareToSocialDialog).queryByText(
-      "At least one platform should be selected",
+      "Please select at least one social platform for at least one profile",
     ),
   ).not.toBeInTheDocument();
-  expect(
-    within(shareToSocialDialog).queryByText(
-      "At least one platform should be selected",
-    ),
-  ).not.toBeInTheDocument();
+
   expect(
     within(shareToSocialDialog).queryByText("Required field"),
   ).not.toBeInTheDocument();
@@ -67,7 +63,7 @@ test("As a user, I should be able to post content to social profiles", async () 
   const profileNotSelectedAlert =
     within(shareToSocialDialog).getByRole("alert");
   expect(profileNotSelectedAlert).toHaveTextContent(
-    "At least one platform should be selected",
+    "Please select at least one social platform for at least one profile",
   );
   user.click(within(profile2).getByLabelText("Instagram"));
   await waitFor(() => expect(profileNotSelectedAlert).not.toBeInTheDocument());
