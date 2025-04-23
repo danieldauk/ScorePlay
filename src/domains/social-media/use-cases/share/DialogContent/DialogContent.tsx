@@ -51,14 +51,13 @@ type FormData = {
   >;
 };
 
-const FORM_ID = "social-share-form-id";
-
 export const DialogContent = ({
   socialMediaProfiles,
   onCancel,
   onSubmit,
 }: Props) => {
   const shareToProfilesTitleId = useId();
+  const formId = useId();
 
   const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState<FormData>({
@@ -74,7 +73,7 @@ export const DialogContent = ({
     <>
       <MuiDialogContent>
         <form
-          id={FORM_ID}
+          id={formId}
           onSubmit={(e) => {
             e.preventDefault();
             setSubmitted(true);
@@ -236,7 +235,7 @@ export const DialogContent = ({
       >
         <Button onClick={onCancel}>Cancel</Button>
         <Button
-          form={FORM_ID}
+          form={formId}
           variant="contained"
           type="submit"
           disabled={!!validationErrors}
