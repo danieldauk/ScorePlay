@@ -329,7 +329,7 @@ const validationSchema = z
         message: `Description should be at least ${MIN_DESCRIPTION_LENGTH} character(s)`,
       })
       .max(MAX_DESCRIPTION_LENGTH, {
-        message: `Description should at most ${MAX_DESCRIPTION_LENGTH} character(s)`,
+        message: `Description should be at most ${MAX_DESCRIPTION_LENGTH} character(s)`,
       }),
     profileIdToPlatformSelectionMap: z
       .map(
